@@ -11,18 +11,18 @@ class AdminerDumpArray {
 	protected $database = false;
 
 	function dumpFormat() {
-		return array('array' => 'PHP Array');
+		return array('phparray' => 'PHP Array');
 	}
 
 	function dumpTable($table, $style, $is_view = false) {
-		if ($_POST["format"] == "array") {
+		if ($_POST["format"] == "phparray") {
 			return true;
 		}
 	}
 
 	function dumpData($table, $style, $query) {
 
-		if ($_POST["format"] == "array") {
+		if ($_POST["format"] == "phparray") {
 			$connection = connection();
 			$result = $connection->query($query, 1);
 			$table = $table ?: 'data';
@@ -46,7 +46,7 @@ class AdminerDumpArray {
 	}
 
 	function dumpHeaders($identifier, $multi_table = false) {
-		if ($_POST["format"] == "array") {
+		if ($_POST["format"] == "phparray") {
 			$identifier = $identifier ?: 'data';
 			header("Content-Type: ".($_POST['output'] == 'text' ? 'text/plain' : 'application/x-php')."; charset=utf-8");
 			return "php";
