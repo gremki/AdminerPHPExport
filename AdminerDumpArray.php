@@ -23,17 +23,17 @@ class AdminerDumpArray {
 	function dumpData($table, $style, $query) {
 
 		if ($_POST["format"] == "phparray") {
-			$connection = connection();
+			$connection = Adminer\connection();
 			$result = $connection->query($query, 1);
 			$table = $table ?: 'data';
 
 			if (!$this->database) {
 				$this->database = true;
-				echo "<?php\n//" . h(DB) . " database export\n";
+				echo "<?php\n//" . Adminer\h(Adminer\DB) . " database export\n";
 			}
 
 			if ($result) {
-				echo "/** @var array " . h($table) . " table data */\n";
+				echo "/** @var array " . Adminer\h($table) . " table data */\n";
 				echo "$" . addcslashes($table, "\r\n\"\\") . " = [\n";
 				while ($row = $result->fetch_assoc()) {
 					var_export($row);
